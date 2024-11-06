@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoStyle - Sustainable Fashion</title>
+    <style>
+        :root {
+            --primary-color: #E8F5E9;
+            --secondary-color: #F1F8E9;
+            --accent-color: #81C784;
+            --text-color: #2E7D32;
+            --light-bg: #FAFFF9;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .featured {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+        }
+
+        .recommendations {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+        }
+
+        .recommendation-items {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scrollbar-width: none;
+        }
+
+        .recommendation-items::-webkit-scrollbar {
+            display: none;
+        }
+
+        .recommendation-card {
+            min-width: 200px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-2px);
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #66BB6A;
+        }
+
+        h1, h2, h3 {
+            color: #2db336;
+        }
+
+        .price {
+            color: var(--text-color);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Ha's project</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">About</a>
+                <a href="#">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="featured">
+            <h1>Mockup design showcase</h1>
+            <p>For intelligent system class</p>
+        </section>
+
+        <section class="product-grid">
+            <div class="product-card">
+                <div class="product-image">Organic Cotton T-Shirt</div>
+                <h3>Organic Cotton T-Shirt</h3>
+                <p class="price">10d</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-image">Hemp Casual Pants</div>
+                <h3>Hemp Casual Pants</h3>
+                <p class="price">$59.99</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-image">Bamboo Fiber Dress</div>
+                <h3>Bamboo Fiber Dress</h3>
+                <p class="price">10d</p>
+                <button>Add to Cart</button>
+            </div>
+        </section>
+
+        <section class="recommendations">
+            <h2>Recommended for You</h2>
+            <div class="recommendation-items">
+                <div class="recommendation-card">
+                    <div class="product-image">Recycled Denim</div>
+                    <h3>Recycled Denim Jacket</h3>
+                    <p class="price">20d</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="recommendation-card">
+                    <div class="product-image">Linen Shirt</div>
+                    <h3>Organic Linen Shirt</h3>
+                    <p class="price">25d</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="recommendation-card">
+                    <div class="product-image">Hemp Sweater</div>
+                    <h3>Hemp Blend Sweater</h3>
+                    <p class="price">30d</p>
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
