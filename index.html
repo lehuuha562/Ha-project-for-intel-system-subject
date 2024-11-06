@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ha's Project</title>
+    <title>EcoStyle - Sustainable Fashion</title>
     <style>
         :root {
             --primary-color: #E8F5E9;
@@ -13,9 +13,13 @@
             --light-bg: #FAFFF9;
         }
         
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light-bg);
             color: #333;
@@ -25,6 +29,9 @@
             background-color: var(--primary-color);
             padding: 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav {
@@ -33,6 +40,7 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .logo {
@@ -45,26 +53,78 @@
             margin-left: 1.5rem;
             color: var(--text-color);
             text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
         }
 
         main {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
         }
 
         .featured {
             background-color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            position: relative;
+        }
+
+        .featured h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .featured p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .new-arrivals, .seasonal-section {
+            background-color: white;
             padding: 2rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            color: var(--text-color);
+        }
+
+        .view-all {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .scrollable-products {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scrollbar-width: none;
+        }
+
+        .scrollable-products::-webkit-scrollbar {
+            display: none;
         }
 
         .product-card {
@@ -74,6 +134,8 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: transform 0.2s;
+            min-width: 250px;
+            position: relative;
         }
 
         .product-card:hover {
@@ -92,27 +154,60 @@
             color: var(--text-color);
         }
 
+        .new-badge {
+            background-color: #F44336;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .price {
+            color: var(--text-color);
+            font-weight: bold;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #66BB6A;
+        }
+
         .recommendations {
-            margin-top: 3rem;
+            margin: 3rem auto;
             padding: 2rem;
             background-color: var(--secondary-color);
             border-radius: 8px;
+            max-width: 900px;
+        }
+
+        .recommendations h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
         }
 
         .recommendation-items {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            scrollbar-width: none;
-        }
-
-        .recommendation-items::-webkit-scrollbar {
-            display: none;
         }
 
         .recommendation-card {
-            min-width: 200px;
             background: white;
             padding: 1rem;
             border-radius: 8px;
@@ -124,28 +219,36 @@
             transform: translateY(-2px);
         }
 
-        button {
+        .recommendation-card .product-image {
+            height: 180px;
+        }
+
+        .seasonal-badge {
             background-color: var(--accent-color);
             color: white;
-            border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #66BB6A;
-        }
-
-        h1, h2, h3 {
-            color: #2db336;
-        }
-
-        .price {
-            color: var(--text-color);
             font-weight: bold;
-            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .recommendation-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .recommendation-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -164,28 +267,77 @@
 
     <main>
         <section class="featured">
-            <h1>Mockup design showcase</h1>
-            <p>For intelligent system class</p>
+            <h1>Mockup design landing page</h1>
+            <p>For intelligence system subject</p>
         </section>
 
-        <section class="product-grid">
-            <div class="product-card">
-                <div class="product-image">Shirt 1</div>
-                <h3>Shirt 1</h3>
-                <p class="price">10đ</p>
-                <button>Add to Cart</button>
+        <section class="new-arrivals">
+            <div class="section-header">
+                <h2>New Arrivals</h2>
+                <a href="#" class="view-all">View All →</a>
             </div>
-            <div class="product-card">
-                <div class="product-image">Pants 1</div>
-                <h3>Pants 1</h3>
-                <p class="price">20đ</p>
-                <button>Add to Cart</button>
+            <div class="scrollable-products">
+                <div class="product-card">
+                    <div class="new-badge">New</div>
+                    <div class="product-image">quan1</div>
+                    <h3>quan1</h3>
+                    <p class="price">10đ</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="new-badge">New</div>
+                    <div class="product-image">shirt3</div>
+                    <h3>shirt3</h3>
+                    <p class="price">30đ</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="new-badge">New</div>
+                    <div class="product-image">dress1</div>
+                    <h3>dress1</h3>
+                    <p class="price">20đ</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="new-badge">New</div>
+                    <div class="product-image">Shorts</div>
+                    <h3>Shorts</h3>
+                    <p class="price"9>9đ</p>
+                    <button>Add to Cart</button>
+                </div>
             </div>
-            <div class="product-card">
-                <div class="product-image">Dress 1</div>
-                <h3>Dress 1</h3>
-                <p class="price">10đ</p>
-                <button>Add to Cart</button>
+        </section>
+
+        <section class="seasonal-section">
+            <div class="section-header">
+                <h2>Summer lovers 2024</h2>
+                <span class="seasonal-badge">Limited Time</span>
+            </div>
+            <div class="scrollable-products">
+                <div class="product-card">
+                    <div class="product-image">P2</div>
+                    <h3>P2</h3>
+                    <p class="price">$79.99</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Pants 3</div>
+                    <h3>Pants 3</h3>
+                    <p class="price">$69.99</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Shirt 1</div>
+                    <h3>Shirt 1</h3>
+                    <p class="price">10đ</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Non 1</div>
+                    <h3>Non 1t</h3>
+                    <p class="price">30đ</p>
+                    <button>Add to Cart</button>
+                </div>
             </div>
         </section>
 
@@ -193,20 +345,20 @@
             <h2>Recommended for You</h2>
             <div class="recommendation-items">
                 <div class="recommendation-card">
-                    <div class="product-image">Jacket</div>
-                    <h3>Jacket</h3>
+                    <div class="product-image">Jacket 1</div>
+                    <h3>Jacket 1</h3>
                     <p class="price">20đ</p>
                     <button>Add to Cart</button>
                 </div>
                 <div class="recommendation-card">
-                    <div class="product-image">Shirt 3</div>
-                    <h3>Shirt 3</h3>
-                    <p class="price">25đ</p>
+                    <div class="product-image">Shirt 1</div>
+                    <h3>Shirt 1</h3>
+                    <p class="price">10đ</p>
                     <button>Add to Cart</button>
                 </div>
                 <div class="recommendation-card">
-                    <div class="product-image">Sweater</div>
-                    <h3>Sweater</h3>
+                    <div class="product-image">Sweater2</div>
+                    <h3>Sweater2</h3>
                     <p class="price">30đ</p>
                     <button>Add to Cart</button>
                 </div>
